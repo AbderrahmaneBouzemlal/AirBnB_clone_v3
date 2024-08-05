@@ -179,29 +179,29 @@ if models.storage_t == "db":
             # Assert the object is deleted from the session
             self.mock_session.delete.assert_called_once_with(del_obj)
 
-        # def test_get(self):
-        #     """Test that get returns
-        #     the correct object based on
-        #     class and ID"""
-        #     # Create a mock object
-        #     mock_obj = MagicMock(spec=BaseModel)
-        #     mock_obj.id = "c56a8a10-00f5-4673-8535-2d08795a8cf3"
-        #     mock_obj.__class__.__name__ = "City"
-        #     self.storage.new(mock_obj)
+        def test_get(self):
+            """Test that get returns
+            the correct object based on
+            class and ID"""
+            # Create a mock object
+            mock_obj = MagicMock(spec=BaseModel)
+            mock_obj.id = "c56a8a10-00f5-4673-8535-2d08795a8cf3"
+            mock_obj.__class__.__name__ = "City"
+            self.storage.new(mock_obj)
 
-        #     # Simulate query filter and first method
-        #     mock_query = self.mock_session.query.return_value
-        #     mock_query.filter.return_value.first.return_value = mock_obj
+            # Simulate query filter and first method
+            mock_query = self.mock_session.query.return_value
+            mock_query.filter.return_value.first.return_value = mock_obj
 
-        #     # Retrieve the object
-        #     result = self.storage.get(
-        #         City,
-        #         "c56a8a10-00f5-4673-8535-2d08795a8cf3")
-        #     self.assertEqual(
-        #         result,
-        #         mock_obj,
-        #         "get() should return the correct\
-        #         object based on class and ID")
+            # Retrieve the object
+            result = self.storage.get(
+                City,
+                "c56a8a10-00f5-4673-8535-2d08795a8cf3")
+            self.assertEqual(
+                result,
+                mock_obj,
+                "get() should return the correct\
+                object based on class and ID")
 
         def test_get_invalid_id(self):
             """Test get with invalid ID"""
