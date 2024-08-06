@@ -70,13 +70,15 @@ def create_states():
     strict_slashes=False)
 def update_states(state_id):
     """Updates a State object"""
-    obj = storage.get(State, state_id).to_dict()
+    obj = storage.get(State, state_id)
     if obj is None:
         abort(404)
     try:
         new_data = request.get_json()
         if not new_data:
             return make_response(jsonify({'error': 'Not a JSON'}), 400)
+        if data.get('name') is None:
+            return make_response(jsonify({'error': 'Missing name'}), 400)
     except:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     for k, v in new_data.items():
@@ -84,4 +86,4 @@ def update_states(state_id):
             setattr(obj, k, v)
 
     storage.save()
-    return make_response(jsonify(obj), 200)
+    return make_response(jsonify(obj.to_dict()), 200)
