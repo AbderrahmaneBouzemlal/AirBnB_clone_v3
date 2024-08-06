@@ -95,10 +95,10 @@ def update_city(city_id):
         abort(404)
     try:
         data = request.get_json()
-    if not data:
-        return make_response(jsonify({'error': 'Not a JSON'}), 400)
-    if data.get('name') is None:
-        return make_response(jsonify({'error': 'Missing name'}), 400)
+        if not data:
+            return make_response(jsonify({'error': 'Not a JSON'}), 400)
+        if data.get('name') is None:
+            return make_response(jsonify({'error': 'Missing name'}), 400)
     except Exception:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
 
