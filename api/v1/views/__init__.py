@@ -4,7 +4,7 @@
 from flask import Blueprint
 
 
-app_views = Blueprint('/api/v1', __name__)
+app_views = Blueprint('/api/v1', __name__l, url_prefix='/api/v1')
 
 if True:
     from api.v1.views.index import *
