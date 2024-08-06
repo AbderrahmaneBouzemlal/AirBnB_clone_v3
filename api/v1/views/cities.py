@@ -70,6 +70,7 @@ def create_city_by_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
+        return
     try:
         data = request.get_json()
         if not data:
@@ -79,7 +80,7 @@ def create_city_by_state(state_id):
     except Exception:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
 
-    obj = City(**data)
+    obj = City(**data, state_id=state_id)
     storage.new(obj)
     storage.save()
     return jsonify(obj.to_dict()), 201
@@ -90,9 +91,11 @@ def create_city_by_state(state_id):
     methods=['PUT'],
     strict_slashes=False)
 def update_city(city_id):
+    """update operation"""
     obj = storage.get(City, city_id)
     if not obj:
         abort(404)
+        return
     try:
         data = request.get_json()
         if not data:
@@ -107,4 +110,4 @@ def update_city(city_id):
             setattr(obj, k, v)
 
     storage.save()
-    return jsonify(obj.to_dict()), 200
+    return make_response(jsonify(obj.to_dict()), 200)
