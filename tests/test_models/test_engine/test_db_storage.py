@@ -93,11 +93,11 @@ if models.storage_t == "db":
             """Test counting the number of objects for a given class"""
             storage = Storage()
             initial_count = storage.count(MyModel)
-            
+
             # Add a new object and count again
             new_obj = MyModel()
             storage.new(new_obj)
             storage.save()
             new_count = storage.count(MyModel)
-            
+
             self.assertEqual(new_count, initial_count + 1)
