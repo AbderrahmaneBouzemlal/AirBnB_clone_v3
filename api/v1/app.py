@@ -10,7 +10,8 @@ from os import getenv
 
 
 app = Flask(__name__)
-
+'''The Flask web application instance.'''
+'''The Flask web application instance.'''
 
 app.register_blueprint(app_views)
 
