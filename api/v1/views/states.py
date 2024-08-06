@@ -82,9 +82,9 @@ def update_states(state_id):
         new_data = request.get_json()
         if not new_data:
             return make_response(jsonify({'error': 'Not a JSON'}), 400)
-        if data.get('name') is None:
+        if new_data.get('name') is None:
             return make_response(jsonify({'error': 'Missing name'}), 400)
-    except:
+    except Exception:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     for k, v in new_data.items():
         if k not in ['id', 'created_at', 'updated_at']:
