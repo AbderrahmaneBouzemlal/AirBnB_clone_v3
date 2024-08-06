@@ -88,8 +88,7 @@ def update_states(state_id):
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     for k, v in new_data.items():
         if k not in ['id', 'created_at', 'updated_at']:
-            setattr(obj.to_dict(), k, v)
+            setattr(obj, k, v)
 
     storage.save()
-    storage.reload()
     return make_response(jsonify(obj.to_dict()), 200)
