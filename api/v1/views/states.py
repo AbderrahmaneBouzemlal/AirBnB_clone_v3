@@ -47,7 +47,7 @@ def del_states_id(state_id):
     storage.delete(obj)
     storage.save()
     storage.reload()
-    return {}, 200
+    return make_response({}, 200)
 
 
 @app_views.route('/api/v1/states', methods=['POST'], strict_slashes=False)
@@ -72,14 +72,14 @@ def update_states(state_id):
     """Updates a State object"""
     _ = get_states_id(state_id)
     obj = storage.get(State, state_id).to_dict()
-    data = request.get_json()
+    new_data = request.get_json()
 
-    if not data:
+    if not new_data:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
 
-    for k, v in data.items():
-        if k in ['id', 'created_at', 'updated_at']:
-            pass
-        obj[k] = v
+    for k, v in new_data.items():
+        if k not in ['id', 'created_at', 'updated_at']:
+            setattr(obj, k, v)
 
-    return jsonify(obj), 200
+    storage.save()
+    return make_response(jsonify(obj), 200)
