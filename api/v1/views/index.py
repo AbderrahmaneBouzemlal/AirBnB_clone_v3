@@ -12,7 +12,7 @@ from models.user import User
 from models import storage
 
 
-@app_views.route('/api/v1/status', methods=['GET'], strict_slashes=False)
+@app_views.route('/api/v1/status', strict_slashes=False)
 def status():
     """
     Returns a JSON response with status OK.
