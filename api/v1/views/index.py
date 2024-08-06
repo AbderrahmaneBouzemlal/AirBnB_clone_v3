@@ -31,5 +31,5 @@ def stats():
         "states": storage.count(State),
         "places": storage.count(Place),
         "reviews": storage.count(Review),
-        "users":storage.count(User)
+        "users": storage.count(User)
         })
