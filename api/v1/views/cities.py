@@ -23,7 +23,8 @@ from models import storage
     strict_slashes=False)
 def get_cities(state_id):
     """
-    Retrieves the list of all City objects for a specified State: GET /api/v1/states/<state_id>/cities
+    Retrieves the list of all City objects
+    for a specified State
     """
     state = storage.get(State, state_id)
     if not state:

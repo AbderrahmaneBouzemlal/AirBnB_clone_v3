@@ -20,7 +20,7 @@ def stats():
     Create an endpoint that retrieves the number of each objects by type
     """
     return jsonify(
-        states= storage.count('State'),
+        states=storage.count('State'),
         cities=storage.count('City'),
         places=storage.count('Place'),
         amenities=storage.count('Amenity'),
