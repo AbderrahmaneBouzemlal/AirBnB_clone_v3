@@ -21,12 +21,12 @@ def teardown_db(Exception):
     storage.close()
 
 
-@app.errorhandler(404)
-def not_found(e):
-    response = e.get_response()
-    response.data = json.dumps({"error": "Not found"})
-    response.content_type = "application/json"
-    return response
+# @app.errorhandler(404)
+# def not_found(e):
+#     response = e.get_response()
+#     response.data = json.dumps({"error": "Not found"})
+#     response.content_type = "application/json"
+#     return response
 
 
 if __name__ == '__main__':
