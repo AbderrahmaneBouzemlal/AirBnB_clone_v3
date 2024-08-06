@@ -70,11 +70,15 @@ def create_city_by_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    data = request.get_json()
-    if not data:
+    try:
+        data = request.get_json()
+        if not data:
+            return make_response(jsonify({'error': 'Not a JSON'}), 400)
+        if data.get('name') is None:
+            return make_response(jsonify({'error': 'Missing name'}), 400)
+    except Exception:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-    if data.get('name') is None:
-        return make_response(jsonify({'error': 'Missing name'}), 400)
+
     obj = City(**data)
     storage.new(obj)
     storage.save()
@@ -86,18 +90,21 @@ def create_city_by_state(state_id):
     methods=['PUT'],
     strict_slashes=False)
 def update_city(city_id):
-    obj = storage.get(City, city_id).to_dict()
+    obj = storage.get(City, city_id)
     if not obj:
         abort(404)
-
-    data = request.get_json()
-
+    try:
+        data = request.get_json()
     if not data:
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
+    if data.get('name') is None:
+        return make_response(jsonify({'error': 'Missing name'}), 400)
+    except Exception:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
 
     for k, v in data.items():
-        if k in ['id', 'created_at', 'updated_at']:
-            pass
-        obj[k] = v
+        if k not in ['id', 'created_at', 'updated_at']:
+            setattr(obj, k, v)
 
-    return jsonify(obj), 200
+    storage.save()
+    return jsonify(obj.to_dict()), 200

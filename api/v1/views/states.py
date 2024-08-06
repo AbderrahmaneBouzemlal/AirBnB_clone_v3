@@ -59,7 +59,7 @@ def create_states():
             return make_response(jsonify({'error': 'Not a JSON'}), 400)
         if data.get('name') is None:
             return make_response(jsonify({'error': 'Missing name'}), 400)
-    except:
+    except Exception:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
 
     obj = State(**data)
