@@ -39,11 +39,14 @@ def del_amenities(amenity_id):
 @app_views.route('/api/v1/amenities', methods=['POST'], strict_slashes=False)
 def post_amenity():
     """Returns the new Amenity with the status code 201"""
-    new_amenity = request.get_json()
-    if not new_amenity:
+    try:
+        new_amenity = request.get_json()
+        if not new_amenity:
+            abort(400, "Not a JSON")
+        if 'name' not in new_amenity:
+            abort(400, "Missing name")
+    except Exception:
         abort(400, "Not a JSON")
-    if 'name' not in new_amenity:
-        abort(400, "Missing name")
 
     obj = Amenity(**new_amenity)
     storage.new(obj)
@@ -59,9 +62,12 @@ def put_amenity(amenity_id):
     if not obj:
         abort(404)
 
-    req = request.get_json()
-    if not req:
-        abort(400, "Not a JSON")
+    try:
+        req = request.get_json()
+        if not req:
+            abort(400, "Not a JSON")
+    except Exception:
+        abort(400, "Not a json")
 
     for k, v in req.items():
         if k not in ['id', 'created_at', 'update_at']:
