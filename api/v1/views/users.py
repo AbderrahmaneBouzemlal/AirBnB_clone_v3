@@ -45,13 +45,16 @@ def del_user(user_id):
     strict_slashes=False)
 def post_user():
     """Returns the new User with the status code 201"""
-    new_user = request.get_json()
-    if not new_user:
+    try:
+        new_user = request.get_json()
+        if not new_user:
+            abort(400, "Not a JSON")
+        if 'email' not in new_user:
+            abort(400, "Missing email")
+        if 'password' not in new_user:
+            abort(400, 'Missing password')
+    except Exception:
         abort(400, "Not a JSON")
-    if 'email' not in new_user:
-        abort(400, "Missing email")
-    if 'password' not in new_user:
-        abort(400, 'Missing password')
 
     obj = User(**new_user)
     storage.new(obj)
@@ -72,8 +75,8 @@ def put_user(user_id):
         req = request.get_json()
         if not req:
             abort(400, "Not a JSON")
-    except Exception:
-        abort(400, "Not a JSON")
+    except Exception as e:
+        abort(400, f"Not a JSON {e}")
     for k, v in req.items():
         if k not in ['id', 'email', 'created_at', 'updated_at']:
             setattr(obj, k, v)
