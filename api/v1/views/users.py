@@ -68,11 +68,12 @@ def put_user(user_id):
     obj = storage.get(User, user_id)
     if not obj:
         abort(404)
-
-    req = request.get_json()
-    if not req:
+    try:
+        req = request.get_json()
+        if not req:
+            abort(400, "Not a JSON")
+    except Exception:
         abort(400, "Not a JSON")
-
     for k, v in req.items():
         if k not in ['id', 'email', 'created_at', 'updated_at']:
             setattr(obj, k, v)
