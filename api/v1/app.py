@@ -17,18 +17,17 @@ app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
 
 
-@app.teardown_appcontext
-def teardown_db(Exception):
-    """closes the storage on teardown"""
-    storage.close()
-
-
 @app.errorhandler(404)
 def not_found(e):
     response = e.get_response()
     response.data = json.dumps({"error": "Not found"})
     response.content_type = "application/json"
     return response
+
+@app.teardown_appcontext
+def teardown_db(Exception):
+    """closes the storage on teardown"""
+    storage.close()
 
 
 if __name__ == '__main__':
