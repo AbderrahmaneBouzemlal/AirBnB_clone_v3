@@ -1,4 +1,4 @@
-#!/usr/bin/python3HBNB_API_PORT
+#!/usr/bin/python3
 """
 first endpoint (route) will be to return the status of the API
 """
