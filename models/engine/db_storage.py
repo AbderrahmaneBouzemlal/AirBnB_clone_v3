@@ -79,7 +79,7 @@ class DBStorage:
     def get(self, clss, id):
         """returns the object based on the class and its id"""
         if clss and id:
-            key = f"{clss.__name__}.{id}"
+            key = f"{clss.__class__.__name__}.{id}"
             return self.all(clss).get(key)
         return None
 
