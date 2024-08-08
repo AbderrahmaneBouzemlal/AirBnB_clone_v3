@@ -12,13 +12,13 @@ from models.user import User
 from models import storage
 
 
-@app_views.route('/api/v1/status', methods=['GET'], strict_slashes=False)
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status():
     """ Returns JSON """
     return jsonify(status="OK")
 
 
-@app_views.route('/api/v1/stats', methods=['GET'], strict_slashes=False)
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stats():
     """
     Create an endpoint that retrieves the number of each objects by type
