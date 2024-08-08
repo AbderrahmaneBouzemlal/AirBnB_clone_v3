@@ -24,6 +24,7 @@ def not_found(e):
     response.content_type = "application/json"
     return response
 
+
 @app.teardown_appcontext
 def teardown_db(Exception):
     """closes the storage on teardown"""
