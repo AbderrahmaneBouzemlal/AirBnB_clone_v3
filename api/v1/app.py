@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-First endpoint (route) will be to 
+First endpoint (route) will be to
 return the status of the API
 """
 
