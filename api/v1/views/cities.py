@@ -80,7 +80,8 @@ def create_city_by_state(state_id):
     except Exception:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
 
-    obj = City(**data, state_id=state_id)
+    data.update({'state_id': state_id})
+    obj = City(**data)
     storage.new(obj)
     storage.save()
     return jsonify(obj.to_dict()), 201
