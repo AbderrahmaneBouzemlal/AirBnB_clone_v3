@@ -18,7 +18,7 @@ from models import storage
 
 
 @app_views.route(
-    '/api/v1/states/<state_id>/cities',
+    '/states/<state_id>/cities',
     methods=['GET'],
     strict_slashes=False)
 def get_cities(state_id):
@@ -35,7 +35,7 @@ def get_cities(state_id):
 
 
 @app_views.route(
-    '/api/v1/cities/<city_id>',
+    '/cities/<city_id>',
     methods=['GET'],
     strict_slashes=False
     )
@@ -48,7 +48,7 @@ def get_city(city_id):
 
 
 @app_views.route(
-    '/api/v1/cities/<city_id>',
+    '/cities/<city_id>',
     methods=['DELETE'],
     strict_slashes=False
     )
@@ -63,7 +63,7 @@ def del_city(city_id):
 
 
 @app_views.route(
-    '/api/v1/states/<state_id>/cities',
+    '/states/<state_id>/cities',
     methods=['POST'],
     strict_slashes=False)
 def create_city_by_state(state_id):
@@ -88,7 +88,7 @@ def create_city_by_state(state_id):
 
 
 @app_views.route(
-    '/api/v1/cities/<city_id>',
+    '/cities/<city_id>',
     methods=['PUT'],
     strict_slashes=False)
 def update_city(city_id):

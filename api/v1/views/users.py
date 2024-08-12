@@ -7,7 +7,7 @@ from models.user import User
 
 
 @app_views.route(
-    '/api/v1/users',
+    '/users',
     methods=['GET'], strict_slashes=False)
 def users():
     """Retrieves the list of all User objects"""
@@ -16,7 +16,7 @@ def users():
 
 
 @app_views.route(
-    '/api/v1/users/<user_id>',
+    '/users/<user_id>',
     methods=['GET'], strict_slashes=False)
 def single_user(user_id):
     """Retrieves a User object"""
@@ -27,7 +27,7 @@ def single_user(user_id):
 
 
 @app_views.route(
-    '/api/v1/users/<user_id>',
+    '/users/<user_id>',
     methods=['DELETE'], strict_slashes=False)
 def del_user(user_id):
     """Returns an empty dictionary with the status code 200"""
@@ -40,7 +40,7 @@ def del_user(user_id):
 
 
 @app_views.route(
-    '/api/v1/users',
+    '/users',
     methods=['POST'], strict_slashes=False)
 def post_user():
     """Returns the new User with the status code 201"""
@@ -59,7 +59,7 @@ def post_user():
 
 
 @app_views.route(
-    '/api/v1/users/<user_id>',
+    '/users/<user_id>',
     methods=['PUT'], strict_slashes=False)
 def put_user(user_id):
     """Returns the User object with the status code 200"""

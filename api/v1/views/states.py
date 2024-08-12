@@ -17,7 +17,7 @@ from models.user import User
 from models import storage
 
 
-@app_views.route('/api/v1/states', methods=['GET'], strict_slashes=False)
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def states():
     """Retrieves the list of all State objects"""
     objs = storage.all(State)
@@ -25,7 +25,7 @@ def states():
 
 
 @app_views.route(
-    '/api/v1/states/<state_id>',
+    '/states/<state_id>',
     methods=['GET'],
     strict_slashes=False)
 def get_states_id(state_id):
@@ -37,7 +37,7 @@ def get_states_id(state_id):
 
 
 @app_views.route(
-    '/api/v1/states/<state_id>',
+    '/states/<state_id>',
     methods=['DELETE'],
     strict_slashes=False)
 def del_states_id(state_id):
@@ -50,7 +50,7 @@ def del_states_id(state_id):
     return make_response({}, 200)
 
 
-@app_views.route('/api/v1/states', methods=['POST'], strict_slashes=False)
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_states():
     """Creates a State"""
     try:
@@ -69,7 +69,7 @@ def create_states():
 
 
 @app_views.route(
-    '/api/v1/states/<state_id>',
+    '/states/<state_id>',
     methods=['PUT'],
     strict_slashes=False)
 def update_states(state_id):
